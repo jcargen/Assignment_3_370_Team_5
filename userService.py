@@ -2,11 +2,17 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+
+client = MongoClient('mongodb://localhost:27017/')
+db = client['microservices']
+users_collection = db['users']
+
+
 # Sample data
 users = {
     "1": {"id": "1", "name": "Alice"},
-    "2": {"id": "2", "name": "Bob"}
-}
+        "2": {"id": "2", "name": "Bob"}
+    }
 
 @app.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
